@@ -8,6 +8,7 @@ export const CartPage = () => {
 
   useEffect(() => setCart(JSON.parse(localStorage.getItem("cart") ?? "[]")), []);
   const handleClearCart = () => {
+    localStorage.removeItem("numcart");
     localStorage.removeItem("cart");
     setCart([]);
   };

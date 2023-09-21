@@ -1,11 +1,12 @@
-import { Box, Button, Step, StepLabel, Stepper, Typography } from "@mui/material";
+import { Box, Step, StepLabel, Stepper } from "@mui/material";
 import React, { useState } from "react";
 import { FirstStep } from "./orderSteps/firstStep/FirstStep";
 import { SecondStep } from "./orderSteps/secondStep/SecondStep";
 import { ThirdStep } from "./orderSteps/thirdStep/ThirdStep";
 import { FourthStep } from "./orderSteps/FourthStep/FourthStep";
+import { FivthStep } from "./orderSteps/fivthStep/FivthStep";
 
-const steps = ["Input fio etc", "Cart check", "photo", "delivery"];
+const steps = ["Input fio etc", "Cart check", "photo", "delivery", "final"];
 
 export const MakingOrderPage = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -25,10 +26,11 @@ export const MakingOrderPage = () => {
           );
         })}
       </Stepper>
-      {activeStep === 0 && <FirstStep handleNext={handleNext} />}
-      {activeStep === 1 && <SecondStep handleNext={handleNext} />}
-      {activeStep === 2 && <ThirdStep handleNext={handleNext} />}
-      {activeStep === 3 && <FourthStep handleNext={handleNext} />}
+      {activeStep === 0 && <FirstStep goNext={handleNext} />}
+      {activeStep === 1 && <SecondStep goNext={handleNext} />}
+      {activeStep === 2 && <ThirdStep goNext={handleNext} />}
+      {activeStep === 3 && <FourthStep goNext={handleNext} />}
+      {activeStep === 4 && <FivthStep />}
     </Box>
   );
 };

@@ -2,13 +2,17 @@ import React, { FC, useEffect, useState } from "react";
 import { shopItemsConst } from "../../../../utils/consts/shopItemsConst";
 
 type TStepProps = {
-  handleNext: () => void;
+  goNext: () => void;
 };
 
-export const SecondStep: FC<TStepProps> = ({ handleNext }) => {
+export const SecondStep: FC<TStepProps> = ({ goNext }) => {
   const [cart, setCart] = useState<string[]>([]);
+  const [confirmed, setConfirmed] = useState<boolean>(false);
+  const [nextDisabled, setNextDisabled] = useState<boolean>(true);
 
   useEffect(() => setCart(JSON.parse(localStorage.getItem("cart") ?? "[]")), []);
+
+  useEffect(() => setNextDisabled(!confirmed), [confirmed]);
 
   return (
     <div>
@@ -26,9 +30,11 @@ export const SecondStep: FC<TStepProps> = ({ handleNext }) => {
       </div>
       <div>
         <label>Confirmed</label>
-        <input type="checkbox" />
+        <input type="checkbox" checked={confirmed} onChange={(e) => setConfirmed(e.target.checked)} />
       </div>
-      <button onClick={handleNext}>next</button>
+      <button onClick={goNext} disabled={nextDisabled}>
+        next
+      </button>
     </div>
   );
 };
